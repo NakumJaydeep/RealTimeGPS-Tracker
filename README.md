@@ -5,3 +5,8 @@ RealTimeGPS-Tracker is a real-time GPS location tracking application designed fo
 - frontend/client: minimal static client wrapper (`frontend/client/index.html`)
 - backend/server: backend status endpoint (`backend/server/api-status.php`)
 - existing app pages: `signup.php`, `login.php`, `index.php`, `ajax/session.php`, plus `assets/js/auth.js` validation logic.
+
+## Milestone progress
+- MS1: Create repository and README ✅ Completed
+- MS2: Create frontend/client folder and implement requirements ✅ Completed
+- MS3: Create backend/server folder and implement requirements ✅ Completed
