@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const signupAlert = document.getElementById('signupAlert');
     const loginAlert = document.getElementById('loginAlert');
+    const termsCheckbox = document.getElementById('terms');
+    const passwordStrength = document.getElementById('passwordStrength');
     
     // Auth State Observer - to ensure PHP session stays in sync with Firebase Auth
     // Only run if we are NOT on login/signup pages to prevent infinite redirects if session is messy
@@ -51,12 +53,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (signupForm) {
         signupForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
             const btn = document.getElementById('signupBtn');
             const alertBox = signupAlert;
             
+            if (termsCheckbox && !termsCheckbox.checked) {
+                showAlert(alertBox, 'Please accept the Terms and Conditions to continue.', 'error');
+                return;
+            }
+
+            if (password.length < 6) {
+                showAlert(alertBox, 'Password must be at least 6 characters.', 'error');
+                return;
+            }
+
             btn.disabled = true;
             btn.innerText = 'Creating Account...';
             hideAlert(alertBox);
@@ -138,7 +150,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 btn.innerText = 'Login';
             }
         });
-    }
+        if (passwordStrength && document.getElementById('password')) {
+            document.getElementById('password').addEventListener('input', (e) => {
+                const val = e.target.value;
+                passwordStrength.textContent = `Strength: ${ratePasswordStrength(val)}`;
+            });
+        }    }
     
     // Handle Logout
     if (logoutBtn) {
@@ -184,6 +201,21 @@ document.addEventListener('DOMContentLoaded', () => {
             body: JSON.stringify({ action: 'logout' })
         });
         return response.json();
+    }
+    
+    function ratePasswordStrength(password) {
+        let score = 0;
+        if (!password) return 'None';
+        if (password.length >= 6) score += 1;
+        if (password.length >= 10) score += 1;
+        if (/[A-Z]/.test(password)) score += 1;
+        if (/[a-z]/.test(password)) score += 1;
+        if (/[0-9]/.test(password)) score += 1;
+        if (/[^A-Za-z0-9]/.test(password)) score += 1;
+
+        if (score <= 2) return 'Weak';
+        if (score <= 4) return 'Moderate';
+        return 'Strong';
     }
     
     function showAlert(element, message, type) {
