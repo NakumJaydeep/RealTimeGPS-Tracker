@@ -1,2 +1,7 @@
 # RealTimeGPS-Tracker
 RealTimeGPS-Tracker is a real-time GPS location tracking application designed for mobile and web platforms. The app allows users to view their current geographic coordinates (latitude and longitude) with high accuracy using built-in GPS services. Whether you're building a fleet tracking solution, a personal navigation tool, or an outdoor activity logger, this app serves as the foundation for any project requiring live GPS data. By utilizing modern geolocation APIs and integrating with cloud-based services, it ensures fast and efficient tracking of device locations, offering seamless real-time updates.
+
+## Project structure (milestones)
+- frontend/client: minimal static client wrapper (`frontend/client/index.html`)
+- backend/server: backend status endpoint (`backend/server/api-status.php`)
+- existing app pages: `signup.php`, `login.php`, `index.php`, `ajax/session.php`, plus `assets/js/auth.js` validation logic.
