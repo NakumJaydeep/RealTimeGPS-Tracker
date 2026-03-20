@@ -1,0 +1,270 @@
+/* 
+  Modern Premium CSS for Live Location App 
+  Color Palette: Dark Mode Default / Glassmorphism
+*/
+:root {
+    --bg-color: #0b1120;
+    --nav-bg: rgba(15, 23, 42, 0.7);
+    --card-bg: rgba(30, 41, 59, 0.6);
+    --border-color: rgba(255, 255, 255, 0.1);
+    
+    --primary: #3b82f6;      /* Blue */
+    --primary-hover: #2563eb;
+    --secondary: #10b981;    /* Green */
+    --danger: #ef4444;       /* Red */
+    
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    
+    --font-heading: 'Inter', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Glassmorphism Utilities */
+.glass {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+}
+
+/* Typography */
+h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; }
+a { text-decoration: none; color: inherit; }
+
+/* Dynamic Background Glow */
+body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(59, 130, 246, 0.08) 0%, transparent 40%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Navigation System */
+.navbar {
+    position: fixed;
+    top: 0; width: 100%;
+    z-index: 1000;
+    background: var(--nav-bg);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-link:hover {
+    color: var(--text-main);
+}
+
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-main);
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+/* Buttons */
+.btn-login, .btn-signup, .btn-primary {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.btn-login { border: 1px solid var(--primary); color: var(--primary); }
+.btn-login:hover { background: var(--primary); color: white; }
+
+.btn-signup, .btn-primary { background: var(--primary); color: white; border: none; cursor: pointer; }
+.btn-signup:hover, .btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4); }
+
+.btn-danger { background: var(--danger); color: white; padding: 0.5rem 1rem; border-radius: 8px; border: none; cursor: pointer;}
+.btn-danger:hover { filter: brightness(1.1); }
+
+/* Main Content Area */
+.main-content {
+    flex: 1;
+    margin-top: 80px; /* Space for fixed nav */
+    padding: 2rem;
+    max-width: 1200px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Authentication Forms */
+.auth-container {
+    max-width: 450px;
+    margin: 4rem auto;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    text-align: center;
+}
+
+.auth-title { font-size: 1.8rem; margin-bottom: 2rem; }
+
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block; margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.9rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: rgba(0,0,0,0.2);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-main);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.auth-btn { width: 100%; padding: 0.8rem; font-size: 1.1rem; margin-top: 1rem; }
+
+.auth-links { margin-top: 1.5rem; color: var(--text-muted); font-size: 0.9rem; }
+.auth-links a { color: var(--primary); font-weight: 500; }
+
+/* Error/Success Messages */
+.alert { padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; display: none;}
+.alert-error { background: rgba(239, 68, 68, 0.1); border: 1px solid var(--danger); color: #fca5a5; }
+.alert-success { background: rgba(16, 185, 129, 0.1); border: 1px solid var(--secondary); color: #6ee7b7; }
+
+/* Map Container */
+#map {
+    width: 100%;
+    height: calc(100vh - 120px);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    border: 1px solid var(--border-color);
+}
+
+/* Layout Utilities */
+.page-title { margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;}
+
+/* Groups Interface */
+.groups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.group-card {
+    padding: 1.5rem;
+    border-radius: 12px;
+    transition: var(--transition);
+}
+
+.group-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); }
+
+.group-name { font-size: 1.2rem; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
+
+.member-list { margin-top: 1rem; }
+.member-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.member-item:last-child { border-bottom: none; }
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.9rem; border-top: 1px solid var(--border-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; flex-direction: column; position: absolute; top: 100%; left: 0;
+        width: 100%; background: var(--bg-color); padding: 1.5rem; border-bottom: 1px solid var(--border-color);
+    }
+    .nav-links.active { display: flex; }
+    .nav-toggle { display: block; }
+    #map { height: calc(100vh - 180px); }
+}
+
+/* Hide Google Maps Development Watermarks & Errors */
+.gm-err-container,
+.gm-err-content,
+.gm-err-icon,
+.gm-style-cc {
+    display: none !important;
+}
+.gm-style div[style*="z-index: 1000000"],
+.gm-style div[style*="z-index: 1000001"] {
+    display: none !important;
+}
+.gmnoprint a, .gmnoprint span {
+    display: none !important;
+}
+.gmnoprint div {
+    background: none !important;
+}
